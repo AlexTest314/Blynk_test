@@ -1,6 +1,7 @@
-import Items from "./Items";
-import { ItemsContext } from "./ItemsContext";
+import Items from "../Items";
+import { ItemsContext } from "../ItemsContext";
 import { useContext, useState } from "react";
+import "./index.css";
 
 const ItemsCard = () => {
   const { addItem } = useContext(ItemsContext);

@@ -1,5 +1,7 @@
 import React from "react";
+import "./index.css";
 
+import "./index.css";
 const Comment = ({ comment }) => {
   return (
     <div className='comment-card'>

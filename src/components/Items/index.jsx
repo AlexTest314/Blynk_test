@@ -1,10 +1,10 @@
 import React, { useContext, useEffect } from "react";
-import { Item } from "./Item";
-import { ItemsContext } from "./ItemsContext";
+import { Item } from "../Item";
+import { ItemsContext } from "../ItemsContext";
+import "./index.css";
 
 const Items = () => {
   const { items } = useContext(ItemsContext);
-  useEffect(() => {}, [items]);
   return (
     <ul className='items-list'>
       {items &&

@@ -1,0 +1,30 @@
+.aside-wrapper {
+	position: relative;
+	width: 100%;
+	min-height: 1px;
+	padding: 0 15px;
+ }
+ 
+ .aside {
+	min-height: 100vh;
+	height: 100%;
+	width: 100%;
+	background-color: #2b2f3e;
+	padding: 10px;
+ }
+ 
+ .aside h2 {
+	color: white;
+ }
+ 
+ .aside div {
+	color: #5b5d63;
+ }
+
+ @media (min-width: 576px) {
+	.aside-wrapper {
+	  flex: 0 0 16.666667%;
+	  max-width: 16.666667%;
+	}
+ }
+ 

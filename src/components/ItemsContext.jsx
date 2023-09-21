@@ -5,25 +5,12 @@ export const ItemsContext = createContext({});
 const ItemsContextProvider = ({ children }) => {
   const ls = typeof window !== "undefined" ? window.localStorage : null;
 
-  const [items, setItems] = useState([]);
-  const [activeItem, setActiveItem] = useState(null);
-
-  console.log("items", items);
+  const [items, setItems] = useState(JSON.parse(ls.getItem("items")) || []);
+  const [activeItem, setActiveItem] = useState(JSON.parse(ls.getItem("activeItem")) || null);
 
   useEffect(() => {
-    if (ls && ls.getItem("items")) {
-      setItems(JSON.parse(ls.getItem("items")));
-    }
-    if (ls && ls.getItem("activeItem")) {
-      setActiveItem(JSON.parse(ls.getItem("activeItem")));
-    }
-  }, []);
-
-  useEffect(() => {
-    if (items?.length) {
-      ls?.setItem("items", JSON.stringify(items));
-      ls?.setItem("activeItem", JSON.stringify(activeItem));
-    }
+    ls?.setItem("items", JSON.stringify(items));
+    ls?.setItem("activeItem", JSON.stringify(activeItem));
 
     if (items?.comments?.length) {
       ls?.setItem("items", JSON.stringify(items));
@@ -35,16 +22,14 @@ const ItemsContextProvider = ({ children }) => {
       setActiveItem(newItem);
     }
     setItems((prev) => [...prev, newItem]);
-    ls?.setItem("items", JSON.stringify(items));
-    ls?.setItem("activeItem", JSON.stringify(activeItem));
   };
 
   const removeItem = (id) => {
     setItems((prev) => {
       const newArray = prev.filter((value) => value.id !== id);
       if (newArray.length === 0) {
-        ls?.setItem("items", JSON.stringify(newArray));
-        ls?.setItem("activeItem", JSON.stringify(null));
+        setItems(newArray);
+        setActiveItem(null);
       } else {
         setActiveItem(newArray[newArray.length - 1]);
       }
@@ -56,7 +41,7 @@ const ItemsContextProvider = ({ children }) => {
   const addComment = (id, comment, color) => {
     setItems((prev) => {
       const newArray = [...prev];
-      const idx = prev.map((item) => item.id).indexOf(id);
+      const idx = prev.findIndex((item) => item.id === id);
       const commentIdx = prev[idx].comments.length;
       const newComment = {
         id: `${id}-${commentIdx}`,
@@ -68,7 +53,19 @@ const ItemsContextProvider = ({ children }) => {
     });
   };
 
-  return <ItemsContext.Provider value={{ addItem, items, removeItem, activeItem, setActiveItem, addComment }}>{children}</ItemsContext.Provider>;
+  return (
+    <ItemsContext.Provider
+      value={{
+        addItem,
+        items,
+        removeItem,
+        activeItem,
+        setActiveItem,
+        addComment
+      }}>
+      {children}
+    </ItemsContext.Provider>
+  );
 };
 
 export default ItemsContextProvider;

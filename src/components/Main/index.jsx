@@ -1,7 +1,8 @@
 import React from "react";
-import ItemsContextProvider from "./ItemsContext";
-import ItemsCard from "./ItemsCard";
-import Comments from "./Comments";
+import ItemsContextProvider from "../ItemsContext";
+import ItemsCard from "../ItemsCard";
+import Comments from "../Comments";
+import "./index.css";
 
 const Main = () => {
   return (

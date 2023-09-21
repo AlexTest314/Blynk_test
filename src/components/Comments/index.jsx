@@ -1,6 +1,7 @@
 import React, { useContext, useState } from "react";
-import { ItemsContext } from "./ItemsContext";
-import Comment from "./Comment";
+import { ItemsContext } from "../ItemsContext";
+import Comment from "../Comment";
+import "./index.css";
 
 const Comments = () => {
   const { activeItem, addComment } = useContext(ItemsContext);
@@ -44,7 +45,7 @@ const Comments = () => {
             value={comment}
             onChange={(e) => setComment(e.target.value)}
           />
-          <button className='btn-new-comment'>Add New</button>
+          <button type="submit" className='btn-new-comment'>Add New</button>
         </form>
       </div>
     </div>
