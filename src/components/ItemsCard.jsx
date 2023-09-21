@@ -7,35 +7,34 @@ const ItemsCard = () => {
   const [name, setName] = useState("");
 
   const addNewItem = (e) => {
-e.preventDefault()
+    e.preventDefault();
     const newItem = {
       id: Math.floor(Math.random() * 100000000),
       name,
       comments: []
-    }
+    };
 
     addItem(newItem);
-    setName('')
+    setName("");
   };
   return (
-    <div className='col-3'>
-      <div className='react-items'>
+    <div>
+      <div className='items-card'>
         <h1>Items</h1>
         <form
-          className='react-items-input-group'
-          onSubmit={addNewItem}
-          >
+          className='items-card-input'
+          onSubmit={addNewItem}>
           <input
             type='text'
-            className='form-control'
+            className='form-input'
             placeholder='Type name here...'
             required
             value={name}
             onChange={(e) => setName(e.target.value)}
           />
           <button
-            className='btn  btn-info'
-            type='submit' >
+            className='btn-new-item'
+            type='submit'>
             Add New
           </button>
         </form>
